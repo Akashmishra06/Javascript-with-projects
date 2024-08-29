@@ -1,27 +1,39 @@
-"use strict"; //strictly use js newer version
+"use strict";
 
-// alert("Hello") // not in node 
+// NNBBSSU
 
 let name = "Akash"
-let age = 18
-let isLoggedIn = false
-let temprature = null // typeof(obj)
+let age = 22
+let ifLoggedIn = false
 
-// nnbbssu
+// number = 2 to power 53
+// BigInt 
+// String "", ''
+// Boolean = true or false
+// null is null stand alone alue
+// undefined = undefined
+// symbol = Symbol('123') uniqe 
 
-// Number, null, BigInt, Boolean, undefined, String, Symbol
+// objects
 
-console.log(typeof(name))
-console.log(typeof age)
-
-let ageInString = String(age)
-console.log(typeof ageInString)
+console.log(typeof null)
 
 
-// NaN Not a number but type of (number) 
 
-// converstion datatypes should be same always 
+// Conversion 
 
-// true = 1
-// false = 0
+let score = "3sd3"
+let valueInNumber = Number(score)
+console.log(typeof valueInNumber);
+console.log(valueInNumber); // NaN not a number
+
+// before comparision make sure datatype is same 
+
+// "33" = 33
+// "3df" = NaN
+// true = 1, false = 0
+
+let isLoggedIn = 1
+let BoolIsLoggedIn = Boolean(isLoggedIn)
+console.log(BoolIsLoggedIn);
 
