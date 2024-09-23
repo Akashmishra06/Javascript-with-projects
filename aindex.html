@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive To-Do App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 300px;
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .message {
+            color: red;
+        }
+        #todoList {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+        }
+        .todo-item button {
+            background-color: #dc3545;
+        }
+        .todo-item button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <div class="container" id="authContainer">
+        <h2 id="authTitle">Login</h2>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button id="authButton">Login</button>
+        <button id="registerButton">Register</button>
+        <p class="message" id="message"></p>
+        <div id="userList"></div>
+    </div>
+    <div class="container" id="todoContainer" style="display: none;">
+        <h2>Your To-Do List</h2>
+        <input type="text" id="todoInput" placeholder="Add a new task">
+        <button id="addTodoButton">Add Task</button>
+        <div id="todoList"></div>
+        <button id="logoutButton">Logout</button>
+    </div>
+    <script>
+        const users = JSON.parse(localStorage.getItem('users')) || {};
+        const todos = JSON.parse(localStorage.getItem('todos')) || {};
+        const authButton = document.getElementById('authButton');
+        const registerButton = document.getElementById('registerButton');
+        const message = document.getElementById('message');
+        const authContainer = document.getElementById('authContainer');
+        const todoContainer = document.getElementById('todoContainer');
+        const userList = document.getElementById('userList');
+        const todoInput = document.getElementById('todoInput');
+        const todoList = document.getElementById('todoList');
+        const addTodoButton = document.getElementById('addTodoButton');
+
+        function updateUserList() {
+            userList.innerHTML = '<h3>Registered Users:</h3>' + Object.keys(users).map(user => `<div>${user}</div>`).join('');
+        }
+
+        function updateTodoList(username) {
+            todoList.innerHTML = '';
+            if (todos[username]) {
+                todos[username].forEach((todo, index) => {
+                    const todoItem = document.createElement('div');
+                    todoItem.className = 'todo-item';
+                    todoItem.innerHTML = `
+                        <span>${todo}</span>
+                        <button onclick="removeTodo('${username}', ${index})">Delete</button>
+                    `;
+                    todoList.appendChild(todoItem);
+                });
+            }
+        }
+
+        authButton.addEventListener('click', () => {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (users[username] && users[username] === password) {
+                localStorage.setItem('authenticated', 'true');
+                localStorage.setItem('currentUser', username);
+                message.textContent = '';
+                showTodoList(username);
+            } else {
+                message.textContent = 'Invalid username or password';
+            }
+        });
+
+        registerButton.addEventListener('click', () => {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username && password) {
+                if (users[username]) {
+                    message.textContent = 'Username already exists';
+                } else {
+                    users[username] = password;
+                    localStorage.setItem('users', JSON.stringify(users));
+                    message.textContent = 'Registration successful!';
+                    updateUserList();
+                }
+            } else {
+                message.textContent = 'Please enter a username and password';
+            }
+        });
+
+        function showTodoList(username) {
+            authContainer.style.display = 'none';
+            todoContainer.style.display = 'block';
+            updateTodoList(username);
+        }
+
+        addTodoButton.addEventListener('click', () => {
+            const username = localStorage.getItem('currentUser');
+            const todo = todoInput.value;
+
+            if (todo) {
+                if (!todos[username]) {
+                    todos[username] = [];
+                }
+                todos[username].push(todo);
+                localStorage.setItem('todos', JSON.stringify(todos));
+                todoInput.value = '';
+                updateTodoList(username);
+            }
+        });
+
+        window.removeTodo = function(username, index) {
+            todos[username].splice(index, 1);
+            localStorage.setItem('todos', JSON.stringify(todos));
+            updateTodoList(username);
+        };
+
+        document.getElementById('logoutButton').addEventListener('click', logout);
+
+        function logout() {
+            localStorage.removeItem('authenticated');
+            localStorage.removeItem('currentUser');
+            location.reload();
+        }
+
+        if (localStorage.getItem('authenticated')) {
+            const username = localStorage.getItem('currentUser');
+            showTodoList(username);
+        }
+
+        updateUserList();
+    </script>
+</body>
+</html>

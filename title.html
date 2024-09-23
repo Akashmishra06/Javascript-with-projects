@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        .root {
+            padding: 50px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .color-btn {
+            height: 100px;
+            width: 100px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-red { background-color: red; }
+        .btn-green { background-color: green; }
+        .btn-yellow { background-color: yellow; }
+        .btn-blue { background-color: blue; }
+    </style>
+    <title>Color Changer</title>
+</head>
+<body>
+
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary active">
+            <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+        </label>
+        <label class="btn btn-secondary">
+            <input type="radio" name="options" id="option2" autocomplete="off"> Radio
+        </label>
+        <label class="btn btn-secondary">
+            <input type="radio" name="options" id="option3" autocomplete="off"> Radio
+        </label>
+    </div>
+
+    <div class="root">
+        <button class="color-btn btn-red" id="btn-red"></button>
+        <button class="color-btn btn-green" id="btn-green"></button>
+        <button class="color-btn btn-yellow" id="btn-yellow"></button>
+        <button class="color-btn btn-blue" id="btn-blue"></button>
+        <button id="time" class="btn btn-secondary"></button>
+    </div>
+
+    <script>
+        document.getElementById('btn-red').addEventListener('click', function() {
+            document.body.style.backgroundColor = 'red';
+        });
+
+        document.getElementById('btn-green').addEventListener('click', function() {
+            document.body.style.backgroundColor = 'green';
+        });
+
+        document.getElementById('btn-yellow').addEventListener('click', function() {
+            document.body.style.backgroundColor = 'yellow';
+        });
+
+        document.getElementById('btn-blue').addEventListener('click', function() {
+            document.body.style.backgroundColor = 'blue';
+        });
+
+        document.getElementById('option1').addEventListener('click', function() {
+            document.body.style.backgroundColor = 'black';
+        });
+
+        document.getElementById('option2').addEventListener('click', function() {
+            document.body.style.backgroundColor = 'white';
+        });
+
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('time').textContent = now.toLocaleTimeString();
+        }
+
+        // Call updateTime immediately to set the initial time
+        updateTime();
+
+        // Update the time every second (1000 milliseconds)
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>
