@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* .btn{
+            margin: 2px;
+        } */
+    </style>
+</head>
+<body>
+    
+    <button id="red" class="btn"></button>
+    <button id="green" class="btn"></button>
+    <button id="blue" class="btn"></button>
+    <button id="yellow" class="btn"></button>
+
+
+    <script>
+        document.getElementById("red").addEventListener('mouseover', function(){
+            document.body.style.backgroundColor = "black"
+        })
+
+        document.getElementById("green").addEventListener('mouseover', function(){
+            document.body.style.backgroundColor = "white"
+        })
+
+        function timed(){
+            const now = new Date()
+            document.getElementById("yellow").textContent = now.toLocaleTimeString()
+
+        }
+
+        setInterval(timed, 1000)
+    </script> 
+</body>
+</html>

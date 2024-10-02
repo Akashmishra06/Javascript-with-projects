@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: black;
+        }
+        .root{
+            margin-top: 20%;
+            margin-left: 20%;
+        }
+
+        .btn{
+            margin: 2%;
+            height: 100px;
+            width: 100px;
+            border: none;
+        }
+
+        #black{
+            background-color: black;
+            
+        }
+
+        #red{
+            background-color: red;
+            
+        }
+
+        #green{
+            background-color: green;
+            
+        }
+
+        #blue{
+            background-color: blue;
+            
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <div class="root">
+            <button class="btn" id="red"></button>
+            <button class="btn" id="green"></button>
+            <button class="btn" id="blue"></button>
+            <button class="btn" id="black"></button>
+            <button class="btn" id="time"></button>
+        </div>
+    </center>
+
+
+
+    <script>
+        document.getElementById("red").addEventListener("click", function(){
+            document.body.style.backgroundColor = "red"
+        })
+        document.getElementById("green").addEventListener("click", function(){
+            document.body.style.backgroundColor = "green"
+        })
+        document.getElementById("blue").addEventListener("click", function(){
+            document.body.style.backgroundColor = "blue"
+        })
+        document.getElementById("black").addEventListener("click", function(){
+            document.body.style.backgroundColor = "black"
+        })
+
+        function time(){
+            const time = new Date()
+            document.getElementById("time").textContent = time.toLocaleTimeString()
+        }
+        time()
+        setInterval(time, 1000)
+    </script>
+</body>
+</html>
