@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>newProject</title>
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .btn-1 {
+            height: 100px;
+            width: 100px;
+            border-style: none;
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: white;
+            text-align: center;
+        }
+
+        #black { background-color: black; }
+        #red { background-color: red; }
+        #green { background-color: green; }
+        #orange { background-color: orange; }
+        #blue { background-color: blue; }
+        #white { background-color: white; color: black; }
+        #purple { background-color: purple; }
+        #time-1 { background-color: gray; color: black; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <button id="black" class="btn-1"></button>
+    <button id="red" class="btn-1"></button>
+    <button id="green" class="btn-1"></button>
+    <button id="orange" class="btn-1"></button>
+    <button id="blue" class="btn-1"></button>
+    <button id="white" class="btn-1"></button>
+    <button id="purple" class="btn-1"></button>
+    <button id="time-1" class="btn-1"></button>
+</div>
+
+<script>
+    document.getElementById("black").addEventListener("click", function() {
+        document.body.style.backgroundColor = "black";
+    });
+
+    document.getElementById("red").addEventListener("click", function() {
+        document.body.style.backgroundColor = "red";
+    });
+
+    document.getElementById("green").addEventListener("click", function() {
+        document.body.style.backgroundColor = "green";
+    });
+
+    document.getElementById("orange").addEventListener("click", function() {
+        document.body.style.backgroundColor = "orange";
+    });
+
+    document.getElementById("blue").addEventListener("click", function() {
+        document.body.style.backgroundColor = "blue";
+    });
+
+    document.getElementById("white").addEventListener("click", function() {
+        document.body.style.backgroundColor = "white";
+    });
+
+    document.getElementById("purple").addEventListener("click", function() {
+        document.body.style.backgroundColor = "purple";
+    });
+
+    setInterval(() => {
+        const currentTime = new Date().toLocaleTimeString();
+        document.getElementById("time-1").innerHTML = currentTime;
+    }, 1000);
+</script>
+
+</body>
+</html>
